@@ -8,3 +8,5 @@ torch
 torchvision
 tensorboard
 black
+metrohash
+torch-tb-profiler
