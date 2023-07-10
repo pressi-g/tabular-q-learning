@@ -7,3 +7,4 @@ minigrid
 torch
 torchvision
 tensorboard
+black

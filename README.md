@@ -52,7 +52,38 @@ Here's a brief description of the files in this repository:
 
 Feel free to explore the code files, modify them, and experiment with different settings to understand and improve the Tabular Q-Learning algorithm on MiniGridWorld.
 
+
+## Testing
+
+This project includes test cases to ensure the correctness of the implemented algorithms and functionalities. The tests are written using the `pytest` framework. To run the tests, follow these steps:
+
+1. Make sure you have installed the project dependencies as mentioned in the installation section.
+
+2. Open a terminal or command prompt and navigate to the project directory.
+
+3. Install `pytest` using `pip`:
+
+   ```shell
+   pip install pytest
+   ```
+
+4. Once `pytest` is installed, you can run the tests by executing the following command:
+
+   ```shell
+   pytest
+   ```
+
+   This command will discover and execute all the test cases in the project.
+
+   Note: The test files should be named with the prefix `test_` for `pytest` to automatically detect them.
+
+5. After running the tests, you will see the test results in the terminal or command prompt, indicating which tests passed or failed.
+
+It's important to regularly run the tests to ensure the correctness of your implementation, especially when modifying the code or adding new features. Writing tests for different scenarios and edge cases can help uncover potential bugs and provide confidence in the functionality of your project.
+
+Feel free to expand the test suite by adding more test cases as you develop your project further.
+
+If you encounter any issues or failures during the test execution, please feel free to open an issue in this repository for assistance.
+
 If you have any questions or run into issues, please open an issue in this repository, and I'll be happy to assist you.
 ```
-
-Feel free to customize the contents of the `README.md` file based on your specific implementation and requirements.
