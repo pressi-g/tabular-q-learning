@@ -1,0 +1,9 @@
+jupyter
+numpy
+matplotlib
+seaborn
+gymnasium
+minigrid
+torch
+torchvision
+tensorboard
