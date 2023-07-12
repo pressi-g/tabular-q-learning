@@ -104,24 +104,6 @@ def extract_object_information(obs):
     return np.reshape(tmp, [rows, cols], "C")
 
 
-# def main():
-#     # Create the MiniGrid environment
-#     env = create_minigrid_environment()
-
-#     # Run the random agent
-#     obs, reward, done, truncated, info, action = random_agent(env)
-
-#     # Print the final action, reward, done, info, and observation
-#     print("Final action: %d" % action)
-#     print("Final reward: %d" % reward)
-#     print("Final done: %s" % done)
-#     print("Final info: %s" % info)
-#     print("Final observation: %s" % obs)
-
-# if __name__ == "__main__":
-#     main()
-
-
 def epsilon_greedy_action(Q, currentS_Key, numActions, epsilon):
     """
     Perform an epsilon-greedy action selection.
@@ -140,115 +122,14 @@ def epsilon_greedy_action(Q, currentS_Key, numActions, epsilon):
         action = random.randint(0, numActions-1)
     else:
         # Exploit the environment by selecting an action that maximizes the value function at the current state
-        action = np.argmax(Q[currentS_Key])
+        # add try catch if the action is not in the dictionary as yet. Happens when the state is actioned for the first time
+        try:
+            action = np.argmax(Q[currentS_Key])
+        except KeyError:
+            Q[currentS_Key] = np.zeros(numActions)
+            action = np.argmax(Q[currentS_Key])
 
     return action
-
-
-def q_learning(env, episodes, alpha, gamma, epsilon):
-    """
-    Train the agent using Q-Learning.
-
-    Parameters:
-        env (gym.Env): The Gym environment.
-        episodes (int): The number of episodes to train the agent.
-        alpha (float): The learning rate.
-        gamma (float): The discount factor.
-        epsilon (float): The exploration rate.
-
-    Returns:
-        dict: The learned Q-values.
-        float: The average reward per episode.
-        float: The average number of steps per episode.
-    """
-
-    # Tensorboard writer
-    writer = SummaryWriter()
-
-    Q = {}  # declare the variable to store the tabular value-function
-
-    max_steps = env.max_steps
-    numActions = 3  # env.action_space.n
-
-    # total_reward = 0
-    # total_steps = 0
-
-    # Use a wrapper so the observation only contains the grid information
-    env = ImgObsWrapper(env)
-
-    print("Start training...")
-    steps_done = 0  # Counter for total number of training steps taken
-
-    for e in range(episodes):
-        # reset the environment
-        obs, _ = env.reset()
-
-
-        # extract the current state from the observation
-        currentS = extract_object_information(obs)
-
-        for i in range(max_steps):
-            # Choose an action using epsilon-greedy action selection
-            # currentS_Hash = hash(tuple(currentS.flatten()))
-            currentS_Hash = metrohash.hash64_int(currentS)
-
-            action = epsilon_greedy_action(
-                Q, currentS_Hash, numActions, epsilon
-            )
-
-            # Increment the 'steps_done' counter
-            steps_done += 1
-
-            # take the action in the environment
-            next_obs, reward, done, truncated, info = env.step(action)
-
-            # extract the next state from the observation
-            nextS = extract_object_information(next_obs)
-            nextS_Hash = metrohash.hash64_int(nextS)
-
-            # Update the Q-value for the current state-action pair
-            if currentS_Hash not in Q:
-                Q[currentS_Hash] = np.zeros(numActions)
-            if nextS_Hash not in Q:
-                Q[nextS_Hash] = np.zeros(numActions)
-
-            Q[currentS_Hash][action] += alpha * (
-                reward + gamma * np.max(Q[nextS_Hash]) - Q[currentS_Hash][action]
-            )
-
-            if done:
-                # if agent reached its goal successfully
-                print(
-                    "Finished episode successfully taking %d steps and receiving reward %f"
-                    % (i, reward)
-                )
-                break
-
-            if truncated:
-                # agent failed to reach its goal successfully
-                print(
-                    "Truncated episode taking %d steps and receiving reward %f"
-                    % (i, reward)
-                )
-                break
-
-            # since the episode is not done, update the current state
-            currentS = nextS
-        # # Increment the 'steps_done' counter
-        # total_steps += 1
-        # total_reward += reward
-
-        # After each episode, log the reward to TensorBoard
-        writer.add_scalar("Reward/train", reward, e)
-        writer.flush()
-    
-    # average_reward = total_reward / episodes
-    # average_steps = total_steps / episodes
-
-    print("Done training...")
-    writer.close()
-
-    return Q#, average_reward, average_steps
 
 
 def save_q_values(Q, filename):
@@ -287,117 +168,232 @@ def load_q_values(filename):
     return Q
 
 
-def main():
-    # Create the MiniGrid environment
-    env = create_minigrid_environment()
+# def main():
+#     # Create the MiniGrid environment
+#     env = create_minigrid_environment()
 
 
-    episodes = 3000  # number of episodes to train the agent
-    alpha = 0.2  # learning rate
-    gamma = 0.9  # discount factor
-    epsilon = 0.8  # exploration rate
+#     episodes = 3000  # number of episodes to train the agent
+#     alpha = 0.4  # learning rate
+#     gamma = 0.9  # discount factor
+#     epsilon = 0.8  # exploration rate
 
-    Q = q_learning(env, episodes, alpha, gamma, epsilon)
-    # SARSA = sarsa(env, episodes, alpha, gamma, epsilon)
+#     Q = q_learning(env, episodes, alpha, gamma, epsilon)
+#     # SARSA = sarsa(env, episodes, alpha, gamma, epsilon)
 
-    # Save the Q-values
-    save_q_values(Q, 'q_values.pkl')
-
-    # # Load the Q-values
-    # Q = load_q_values('q_values.pkl')
-    # print(Q)
-
-    # print("Average reward per episode: %f" % average_reward)
-    # print("Average steps per episode: %f" % average_steps)
+#     # Save the Q-values
+#     save_q_values(Q, 'q_values.pkl')
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
+
+
+##########GRIDSEARCH##########
+
+
+def q_learning(env, episodes, alpha, gamma, epsilon):
+    """
+    Train the agent using Q-Learning.
+
+    Parameters:
+        env (gym.Env): The Gym environment.
+        episodes (int): The number of episodes to train the agent.
+        alpha (float): The learning rate.
+        gamma (float): The discount factor.
+        epsilon (float): The exploration rate.
+
+    Returns:
+        dict: The learned Q-values.
+        float: The average reward per episode.
+        float: The average number of steps per episode.
+    """
+    # Tensorboard writer
+    writer = SummaryWriter()
+
+    Q = {}  # declare the variable to store the tabular value-function
+
+    max_steps = env.max_steps
+    numActions = 3  # env.action_space.n
+
+    # Use a wrapper so the observation only contains the grid information
+    env = ImgObsWrapper(env)
+
+    print("Start training...")
+    steps_done = 0  # Counter for total number of training steps taken
+    average_rewards = []
+    average_steps = []
+
+    for e in range(episodes):
+        # reset the environment
+        obs, _ = env.reset()
+
+        # extract the current state from the observation
+        currentS = []
+        currentS = extract_object_information(obs)
+
+        total_reward = 0
+        total_steps = 0
+
+        # decay epsilon
+        epsilon = max(epsilon * 0.999, 0.05)
+
+        for i in range(max_steps):
+            # Choose an action using epsilon-greedy action selection
+            currentS_Hash = metrohash.hash64_int(currentS)
+
+            # Increment the 'steps_done' counter
+            steps_done += 1
 
 
 
-# def grid_search(env, hyperparams, episodes=1000):
-#     """
-#     Perform a grid search to find the optimal hyperparameters.
+            action = epsilon_greedy_action(
+                Q, currentS_Hash, numActions, epsilon
+            )
 
-#     Parameters:
-#         env (gym.Env): The Gym environment.
-#         hyperparams (dict): Dictionary of hyperparameter ranges to search.
-#         n (int): The number of episodes to evaluate the agent for each hyperparameter combination.
+            # take the action in the environment
+            next_obs, reward, done, truncated, info = env.step(action)
 
-#     Returns:
-#         dict: Dictionary containing the optimal hyperparameters and the corresponding Q-values.
-#     """
-#     best_hyperparams = {}
-#     best_reward = float("-inf")
-#     best_steps = float("inf")
+            # extract the next state from the observation
+            nextS = extract_object_information(next_obs)
+            nextS_Hash = metrohash.hash64_int(nextS)
 
-#     param_combinations = list(product(*hyperparams.values()))
+            # Update the Q-value for the current state-action pair
+            if currentS_Hash not in Q:
+                Q[currentS_Hash] = np.zeros(numActions)
+            if nextS_Hash not in Q:
+                Q[nextS_Hash] = np.zeros(numActions)
 
-#     for params in param_combinations:
-#         alpha, gamma, epsilon = params
+            Q[currentS_Hash][action] += alpha * (
+                reward + gamma * np.max(Q[nextS_Hash]) - Q[currentS_Hash][action]
+            )
 
-#         print(
-#             f"Testing hyperparameters: alpha={alpha}, gamma={gamma}, epsilon={epsilon}"
-#         )
+            total_reward += reward
+            total_steps += 1
 
-#         Q = q_learning(
-#             env, episodes=episodes, alpha=alpha, gamma=gamma, epsilon=epsilon
-#         )
+            # if done:
+            #     # if agent reached its goal successfully
+            #     print(
+            #         "Finished episode successfully taking %d steps and receiving reward %f"
+            #         % (i, reward)
+            #     )
+            #     break
 
-#         # Evaluate the agent's performance with the current hyperparameters
-#         total_reward = 0
-#         total_steps = 0
-#         for _ in range(episodes):
-#             obs, _ = env.reset()
-#             currentS = extract_object_information(obs)
-#             done = False
-#             steps = 0
-#             while not done:
-#                 currentS_Hash = metrohash.hash64_int(currentS)
-#                 action = epsilon_greedy_action(
-#                     Q, currentS_Hash, env.action_space.n, epsilon
-#                 )
-#                 obs, reward, done, _, _ = env.step(action)
-#                 nextS = extract_object_information(obs)
-#                 currentS = nextS
-#                 total_reward += reward
-#                 steps += 1
-#             total_steps += steps
+            # if truncated:
+            #     # agent failed to reach its goal successfully
+            #     print(
+            #         "Truncated episode taking %d steps and receiving reward %f"
+            #         % (i, reward)
+            #     )
+            #     break
 
-#         average_reward = total_reward / episodes
-#         average_steps = total_steps / episodes
+            
+            if done:
+                # if agent reached its goal successfully
+                if e >= episodes - 10:
+                    print(
+                        "Finished episode successfully taking %d steps and receiving reward %f"
+                        % (i, reward)
+                    )
+                break
 
-#         print(f"Average reward: {average_reward}")
-#         print(f"Average steps: {average_steps}")
+            if truncated:
+                # agent failed to reach its goal successfully
+                if e >= episodes - 10:
+                    print(
+                        "Truncated episode taking %d steps and receiving reward %f"
+                        % (i, reward)
+                    )
+                break
 
-#         if average_reward > best_reward:
-#             best_reward = average_reward
-#             best_hyperparams = {
-#                 "alpha": alpha,
-#                 "gamma": gamma,
-#                 "epsilon": epsilon,
-#             }
-#             best_steps = average_steps
+            # since the episode is not done, update the current state
+            currentS = nextS
 
-#     # save each hyperparameter combination results to a csv file
-#     with open("hyperparameter_results.csv", "w", newline="") as f:
-#         writer = csv.writer(f)
-#         writer.writerow(
-#             ["alpha", "gamma", "epsilon", "average_reward", "average_steps"]
-#         )
-#         writer.writerow(
-#             [
-#                 best_hyperparams["alpha"],
-#                 best_hyperparams["gamma"],
-#                 best_hyperparams["epsilon"],
-#                 best_reward,
-#                 best_steps,
-#             ]
-#         )
+        # Log the reward and steps per step to TensorBoard
+        writer.add_scalar("Reward/train", reward, e)
+        writer.add_scalar("Steps/train", total_steps-1, e)
+        writer.flush()
 
-#     return best_hyperparams, best_reward, best_steps
+        average_rewards.append(total_reward)
+        average_steps.append(total_steps-1)
 
+        # get the last 100 episodes to calculate the average reward and steps
+        avg_reward = np.mean(average_rewards[-100:])
+        avg_steps = np.mean(average_steps[-100:])
+        final_steps = average_steps[-1]
+        final_reward = average_rewards[-1]
+    
+    # # log the average reward and steps per episode to TensorBoard
+    # writer.add_histogram("Reward/average", np.mean(average_rewards), e)
+    # writer.add_histogram("Steps/average", str(np.mean(average_steps)), e)
+    # writer.flush()
+
+    print("Done training...")
+    writer.close()
+
+    return Q, avg_reward, avg_steps, final_steps, final_reward
+
+def grid_search(env, hyperparams, episodes):
+    """
+    Perform a grid search to find the optimal hyperparameters.
+
+    Parameters:
+        env (gym.Env): The Gym environment.
+        hyperparams (dict): Dictionary of hyperparameter ranges to search.
+        episodes (int): The number of episodes to train the agent for each hyperparameter combination.
+
+    Returns:
+        dict: Dictionary containing the optimal hyperparameters and the corresponding Q-values.
+        list: List of average rewards per episode for the best hyperparameter combination.
+        list: List of average steps per episode for the best hyperparameter combination.
+    """
+    best_hyperparams = {}
+    best_average_rewards = []
+    best_average_steps = []
+    best_reward = -np.inf
+    best_steps = -np.inf
+
+    param_combinations = list(product(*hyperparams.values()))
+
+    # create a csv file to store the results
+    with open('hyperparameter_results.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['alpha', 'gamma', 'epsilon', 'average_steps', 'average_rewards'])
+
+    for params in param_combinations:
+        alpha, gamma, epsilon = params
+
+        print(f"Testing hyperparameters: alpha={alpha}, gamma={gamma}, epsilon={epsilon}")
+
+        Q, average_rewards, average_steps, final_steps, final_reward = q_learning(env, episodes, alpha, gamma, epsilon)
+
+        print(f"Average reward: {average_rewards}")
+        print(f"Average steps: {average_steps}")
+
+        # store the results of the best hyperparameter combination
+        with open('hyperparameter_results.csv', 'a', newline='') as f:
+            writer = csv.writer(f)
+            writer.writerow([alpha, gamma, epsilon, average_steps, average_rewards])
+
+
+        if average_rewards > best_reward:
+            best_reward = average_rewards
+            best_steps = average_steps
+            best_hyperparams = {
+                'alpha': alpha,
+                'gamma': gamma,
+                'epsilon': epsilon,
+            }
+            best_average_rewards = best_reward
+            best_average_steps = best_steps
+
+    # save best hyperparameter combination result to a csv file
+    with open('hyperparameter_results.csv', 'a', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['best_alpha', 'best_gamma', 'best_epsilon', 'best_average_steps', 'best_average_rewards'])
+        writer.writerow([best_hyperparams['alpha'], best_hyperparams['gamma'], best_hyperparams['epsilon'], best_average_steps, best_average_rewards])
+        
+    return best_hyperparams, best_average_rewards, best_average_steps
 
 # def main():
 #     # Create the MiniGrid environment
@@ -405,18 +401,50 @@ if __name__ == "__main__":
 
 #     # Define the hyperparameter ranges to search
 #     hyperparams = {
-#         "alpha": np.linspace(0.1, 0.9, 5),
-#         "gamma": np.linspace(0.1, 0.9, 5),
-#         "epsilon": np.linspace(0.1, 0.9, 5),
+#         'alpha': np.linspace(0.1, 0.9, 9),
+#         'gamma': [0.9],
+#         'epsilon': np.linspace(0.1, 0.9, 9)
 #     }
 
-#     episodes = 10  # Number of episodes to evaluate for each hyperparameter combination
+#     episodes = 3000  # Number of episodes to evaluate for each hyperparameter combination
 
-#     best_hyperparams, best_reward, best_steps = grid_search(env, hyperparams, episodes)
+#     best_hyperparams, best_average_rewards, best_average_steps = grid_search(env, hyperparams, episodes)
 #     print("Best hyperparameters:", best_hyperparams)
-#     print("Best reward:", best_reward)
-#     print("Best steps:", best_steps)
-
+#     print("Best average rewards:", best_average_rewards)
+#     print("Best average steps:", best_average_steps)
 
 # if __name__ == "__main__":
 #     main()
+
+
+def main():
+    # Create the MiniGrid environment
+    env = create_minigrid_environment()
+
+    # Best hyperparameters: {'alpha': 0.1, 'gamma': 0.9, 'epsilon': 0.5} (from grid search)
+    episodes = 3000  # number of episodes to train the agent
+    alpha = 0.1  # learning rate
+    gamma = 0.9  # discount factor
+    epsilon = 0.5  # exploration rate
+    # Best average rewards: 0.9584101562499997 (from grid search)
+    # Best average steps: 10.83 (from grid search)
+
+    # Q, average_rewards, average_steps = q_learning(env, episodes, alpha, gamma, epsilon)
+    Q, average_rewards, average_steps, final_steps, final_reward = q_learning(env, episodes, alpha, gamma, epsilon)
+
+    # SARSA = sarsa(env, episodes, alpha, gamma, epsilon)
+
+    # Save the Q-values
+    save_q_values(Q, 'q_values.pkl')
+
+    # load the Q-values
+    Q = load_q_values('q_values.pkl')
+
+
+    print("Average rewards:", average_rewards)
+    print("Average steps:", average_steps)
+    print("Q-values:", Q)
+
+
+if __name__ == "__main__":
+    main()
