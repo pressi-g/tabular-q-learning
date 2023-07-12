@@ -15,6 +15,7 @@ from utils import *
 # set random seed
 random.seed(5)
 
+
 def sarsa(env, episodes, alpha, gamma, epsilon):
     """
     Train the agent using SARSA.
@@ -73,9 +74,7 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
             nextS_Hash = metrohash.hash64_int(nextS)
 
             # Choose the next action using epsilon-greedy action selection
-            next_action = epsilon_greedy_action(
-                Q, nextS_Hash, numActions, epsilon
-            )
+            next_action = epsilon_greedy_action(Q, nextS_Hash, numActions, epsilon)
 
             # Update the Q-value for the current state-action pair
             if currentS_Hash not in Q:

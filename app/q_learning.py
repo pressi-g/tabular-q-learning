@@ -15,6 +15,7 @@ from utils import *
 # set random seed
 random.seed(69)
 
+
 def q_learning(env, episodes, alpha, gamma, epsilon):
     """
     Train the agent using Q-Learning.
@@ -68,9 +69,7 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
             # Increment the 'steps_done' counter
             steps_done += 1
 
-            action = epsilon_greedy_action(
-                Q, currentS_Hash, numActions, epsilon
-            )
+            action = epsilon_greedy_action(Q, currentS_Hash, numActions, epsilon)
 
             # take the action in the environment
             next_obs, reward, done, truncated, info = env.step(action)
@@ -108,7 +107,6 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
             #     )
             #     break
 
-            
             if done:
                 # if agent reached its goal successfully
                 if e >= episodes - 10:
@@ -132,11 +130,11 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
 
         # Log the reward and steps per step to TensorBoard
         writer.add_scalar("Q-learning: Reward/train", reward, e)
-        writer.add_scalar("Q-learning: Steps/train", total_steps-1, e)
+        writer.add_scalar("Q-learning: Steps/train", total_steps - 1, e)
         writer.flush()
 
         average_rewards.append(total_reward)
-        average_steps.append(total_steps-1)
+        average_steps.append(total_steps - 1)
 
         # get the last 100 episodes to calculate the average reward and steps
         avg_reward = np.mean(average_rewards[-100:])

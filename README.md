@@ -1,6 +1,7 @@
-# Tabular Q-Learning on MiniGridWorld
+# Tabular Q-Learning and SARSA on MiniGridWorld
 
-This repository contains an implementation of Tabular Q-Learning applied to a MiniGridWorld problem using the OpenAI Gymnasium environment.
+This repository contains an implementation of Tabular Q-Learning and SARSA applied to a MiniGridWorld problem using the Farama-Foundation's [minigrid](https://github.com/Farama-Foundation/Minigrid) Gymnasium environment. The agent is restricted to 3 actions (forward, turn left, and turn right). 
+The environment which the agent needs to navigate is a 2D grid, that represents an empty room, and the agents goal is to reach the green goal square, which provides a sparse reward. A small penalty is subtracted for the number of steps to reach the goal.
 
 ## Introduction
 
@@ -10,24 +11,77 @@ Tabular Q-Learning is a reinforcement learning technique that allows an agent to
 
 To run this code, you need to have Python 3.8 and pip installed on your system. Here are the steps to set up the environment:
 
-1. Clone this repository:
+1. Create a virtual environment using `conda` or `venv`:
+
+   ```shell
+   conda create -n rl-env python=3.8
+   ```
+
+   or
+
+   ```shell
+   python3 -m venv rl-env
+   ```
+
+   You can replace `rl-env` with any name you like for your virtual environment.
+   
+   `conda` is recommended since this project was developed using `conda`.
+
+2. Clone this repository:
 
    ```
    git clone https://github.com/pressi_g/tabular-q-learning.git
    ```
 
-2. Change into the project directory:
+3. Change into the project directory:
 
    ```
    cd tabular-q-learning
    ```
 
-3. Install the required dependencies using pip:
+4. Activate the virtual environment:
+
+   ```shell
+   conda activate rl-env
+   ```
+
+   or
+
+   ```shell
+   source rl-env/bin/activate
+   ```
+
+5. Install the required dependencies using pip:
 
    ```
    pip install -r requirements.txt
    ```
 
+6. *Optional*
+
+   Run the training and evaluation script:
+
+   ```
+   python3 main.py
+   ```
+
+7. Run the optimal policy script:
+
+   ```
+   python3 optimal_policy.py
+   ```
+
+8. *Optional*:
+   
+   You can view the training and evaluation results for the grid search by running:
+
+   ```
+   tensorboard --logdir=grid-search-runs --port=8008
+   ```
+   You can view the training and evaluation results for the optimal policy by running:
+   ```
+   tensorboard --logdir=runs    
+   ```
 ## Directory Structure
 
 The structure of this repository is as follows:

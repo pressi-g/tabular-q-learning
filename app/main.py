@@ -4,7 +4,6 @@ from q_learning import q_learning
 from sarsa import sarsa
 
 
-
 # def main():
 #     # Create the MiniGrid environment
 #     env = create_minigrid_environment()
@@ -60,15 +59,22 @@ def main():
     # Best average rewards: 0.9584101562499997 (from grid search)
     # Best average steps: 10.83 (from grid search)
 
-    Q, q_average_rewards, q_average_steps, q_final_steps, q_final_reward = q_learning(env, episodes, alpha, gamma, epsilon)
+    Q, q_average_rewards, q_average_steps, q_final_steps, q_final_reward = q_learning(
+        env, episodes, alpha, gamma, epsilon
+    )
     print("Q-Learning")
     print("Average rewards:", q_average_rewards)
     print("Average steps:", q_average_steps)
     print("Q-values:", Q)
     print("\n")
 
-
-    SARSA, sarsa_average_rewards, sarsa_average_steps, sarsa_final_steps, sarsa_final_reward = sarsa(env, episodes, alpha, gamma, epsilon)
+    (
+        SARSA,
+        sarsa_average_rewards,
+        sarsa_average_steps,
+        sarsa_final_steps,
+        sarsa_final_reward,
+    ) = sarsa(env, episodes, alpha, gamma, epsilon)
     print("\n")
     print("SARSA")
     print("Average rewards:", sarsa_average_rewards)
@@ -77,7 +83,7 @@ def main():
 
     # Save the Q-values
     # save_q_values(Q, 'q_values_q_learning.pkl')
-    save_q_values(SARSA, 'q_values_sarsa.pkl')
+    save_q_values(SARSA, "q_values_sarsa.pkl")
 
     # # load the Q-values
     # Q_q_learning = load_q_values('q_values_q_learning.pkl')

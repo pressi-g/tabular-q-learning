@@ -105,10 +105,9 @@ def epsilon_greedy_action(Q, currentS_Key, numActions, epsilon):
         int: The selected action.
     """
 
-
     if random.random() < epsilon:
         # Explore the environment by selecting a random action
-        action = random.randint(0, numActions-1)
+        action = random.randint(0, numActions - 1)
     else:
         # Exploit the environment by selecting an action that maximizes the value function at the current state
         # add try catch if the action is not in the dictionary as yet. Happens when the state is actioned for the first time
