@@ -22,6 +22,9 @@ from torch.utils.tensorboard import SummaryWriter
 from itertools import product
 import csv
 
+# set random seed
+random.seed(69)
+
 
 # from environment import create_minigrid_environment
 # from utils import extract_object_information
