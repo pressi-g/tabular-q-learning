@@ -12,6 +12,9 @@ from torch.utils.tensorboard import SummaryWriter
 # import functions
 from utils import *
 
+# set random seed
+random.seed(69)
+
 def q_learning(env, episodes, alpha, gamma, epsilon):
     """
     Train the agent using Q-Learning.
@@ -39,7 +42,7 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
     # Use a wrapper so the observation only contains the grid information
     env = ImgObsWrapper(env)
 
-    print("Start training...")
+    print("Start Q-learning training...")
     steps_done = 0  # Counter for total number of training steps taken
     average_rewards = []
     average_steps = []
@@ -128,8 +131,8 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
             currentS = nextS
 
         # Log the reward and steps per step to TensorBoard
-        writer.add_scalar("Reward/train", reward, e)
-        writer.add_scalar("Steps/train", total_steps-1, e)
+        writer.add_scalar("Q-learning: Reward/train", reward, e)
+        writer.add_scalar("Q-learning: Steps/train", total_steps-1, e)
         writer.flush()
 
         average_rewards.append(total_reward)
@@ -141,7 +144,7 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
         final_steps = average_steps[-1]
         final_reward = average_rewards[-1]
 
-    print("Done training...")
+    print("Done Q-learning training...")
     writer.close()
 
     return Q, avg_reward, avg_steps, final_steps, final_reward

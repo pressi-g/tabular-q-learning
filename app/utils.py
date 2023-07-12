@@ -12,8 +12,6 @@ import time
 import pickle
 from os.path import exists
 
-# set random seed
-random.seed(69)
 
 def create_minigrid_environment(grid_type="MiniGrid-Empty-8x8-v0", render_mode=None):
     """
@@ -40,6 +38,7 @@ def random_agent(env):
     Returns:
         Tuple: A tuple containing the action, reward, done status, and info.
     """
+
     done = False
     # # reset the environment and get the initial observation
     obs, info = env.reset()
@@ -105,6 +104,8 @@ def epsilon_greedy_action(Q, currentS_Key, numActions, epsilon):
     Returns:
         int: The selected action.
     """
+
+
     if random.random() < epsilon:
         # Explore the environment by selecting a random action
         action = random.randint(0, numActions-1)

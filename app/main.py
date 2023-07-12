@@ -60,21 +60,28 @@ def main():
     # Best average rewards: 0.9584101562499997 (from grid search)
     # Best average steps: 10.83 (from grid search)
 
-    # Q, average_rewards, average_steps = q_learning(env, episodes, alpha, gamma, epsilon)
-    Q, average_rewards, average_steps, final_steps, final_reward = q_learning(env, episodes, alpha, gamma, epsilon)
+    Q, q_average_rewards, q_average_steps, q_final_steps, q_final_reward = q_learning(env, episodes, alpha, gamma, epsilon)
+    print("Q-Learning")
+    print("Average rewards:", q_average_rewards)
+    print("Average steps:", q_average_steps)
+    print("Q-values:", Q)
+    print("\n")
 
-    # SARSA = sarsa(env, episodes, alpha, gamma, epsilon)
+
+    SARSA, sarsa_average_rewards, sarsa_average_steps, sarsa_final_steps, sarsa_final_reward = sarsa(env, episodes, alpha, gamma, epsilon)
+    print("\n")
+    print("SARSA")
+    print("Average rewards:", sarsa_average_rewards)
+    print("Average steps:", sarsa_average_steps)
+    print("Q-values:", SARSA)
 
     # Save the Q-values
-    save_q_values(Q, 'q_values.pkl')
+    # save_q_values(Q, 'q_values_q_learning.pkl')
+    save_q_values(SARSA, 'q_values_sarsa.pkl')
 
-    # load the Q-values
-    Q = load_q_values('q_values.pkl')
-
-
-    print("Average rewards:", average_rewards)
-    print("Average steps:", average_steps)
-    print("Q-values:", Q)
+    # # load the Q-values
+    # Q_q_learning = load_q_values('q_values_q_learning.pkl')
+    # Q_sarsa = load_q_values('q_values_sarsa.pkl')
 
 
 if __name__ == "__main__":
