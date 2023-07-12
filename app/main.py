@@ -4,49 +4,6 @@ from q_learning import q_learning
 from sarsa import sarsa
 
 
-# def main():
-#     # Create the MiniGrid environment
-#     env = create_minigrid_environment()
-
-
-#     episodes = 3000  # number of episodes to train the agent
-#     alpha = 0.4  # learning rate
-#     gamma = 0.9  # discount factor
-#     epsilon = 0.8  # exploration rate
-
-#     Q = q_learning(env, episodes, alpha, gamma, epsilon)
-#     # SARSA = sarsa(env, episodes, alpha, gamma, epsilon)
-
-#     # Save the Q-values
-#     save_q_values(Q, 'q_values.pkl')
-
-
-# if __name__ == "__main__":
-#     main()
-
-
-# def main():
-#     # Create the MiniGrid environment
-#     env = create_minigrid_environment()
-
-#     # Define the hyperparameter ranges to search
-#     hyperparams = {
-#         'alpha': np.linspace(0.1, 0.9, 9),
-#         'gamma': [0.9],
-#         'epsilon': np.linspace(0.1, 0.9, 9)
-#     }
-
-#     episodes = 3000  # Number of episodes to evaluate for each hyperparameter combination
-
-#     best_hyperparams, best_average_rewards, best_average_steps = grid_search(env, hyperparams, episodes)
-#     print("Best hyperparameters:", best_hyperparams)
-#     print("Best average rewards:", best_average_rewards)
-#     print("Best average steps:", best_average_steps)
-
-# if __name__ == "__main__":
-#     main()
-
-
 def main():
     # Create the MiniGrid environment
     env = create_minigrid_environment()
