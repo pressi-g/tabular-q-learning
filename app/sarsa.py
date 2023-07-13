@@ -40,7 +40,7 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
     Q = {}  # declare the variable to store the tabular value-function
 
     max_steps = env.max_steps
-    numActions = 3 # env.action_space.n
+    numActions = 3  # env.action_space.n
 
     # Use a wrapper so the observation only contains the grid information
     env = ImgObsWrapper(env)
@@ -83,10 +83,10 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
 
             # Update the Q-value for the current state-action pair
             if currentS_Hash not in Q:
-                #Q[currentS_Hash] = np.zeros(numActions)
+                # Q[currentS_Hash] = np.zeros(numActions)
                 Q[currentS_Hash] = np.random.rand(numActions)
             if nextS_Hash not in Q:
-                #Q[nextS_Hash] = np.zeros(numActions)
+                # Q[nextS_Hash] = np.zeros(numActions)
                 Q[nextS_Hash] = np.random.rand(numActions)
 
             Q[currentS_Hash][action] += alpha * (

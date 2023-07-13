@@ -7,8 +7,9 @@ import gymnasium as gym
 from minigrid.wrappers import *
 import time
 from utils import *
-import metrohash   
+import metrohash
 import pygame
+
 
 def render_optimal_policy(title):
     # Load the Q-values
@@ -47,6 +48,7 @@ def render_optimal_policy(title):
     # Close the environment
     env.close()
 
+
 def main():
     # Render optimal policy for Q-learning
     render_optimal_policy("q_learning")
@@ -54,7 +56,6 @@ def main():
     # Render optimal policy for SARSA
     render_optimal_policy("sarsa")
 
+
 if __name__ == "__main__":
     main()
-
-

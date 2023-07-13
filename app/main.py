@@ -5,6 +5,7 @@ from q_learning import q_learning
 from sarsa import sarsa
 from render_optimal_policy import render_optimal_policy
 
+
 def main():
     # Create the MiniGrid environment
     env = create_minigrid_environment()
@@ -24,7 +25,6 @@ def main():
     print("Average rewards:", q_average_rewards)
     print("Average steps:", q_average_steps)
     print("Q-values:", Q)
-    # print("Optimal Policy:", render_optimal_policy("q_learning"))
     print("\n")
 
     (
@@ -41,12 +41,8 @@ def main():
     print("Q-values:", SARSA)
 
     # Save the Q-values
-    save_q_values(Q, 'q_values_q_learning.pkl')
+    save_q_values(Q, "q_values_q_learning.pkl")
     save_q_values(SARSA, "q_values_sarsa.pkl")
-
-    # # load the Q-values
-    # Q_q_learning = load_q_values('q_values_q_learning.pkl')
-    # Q_sarsa = load_q_values('q_values_sarsa.pkl')
 
 
 if __name__ == "__main__":

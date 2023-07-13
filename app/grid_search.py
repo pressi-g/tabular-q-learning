@@ -50,10 +50,12 @@ def grid_search(env, hyperparams, episodes, algorithm):
 
         if algorithm == "q_learning":
             Q, average_rewards, average_steps, final_steps, final_reward = q_learning(
-            env, episodes, alpha, gamma, epsilon)
+                env, episodes, alpha, gamma, epsilon
+            )
         elif algorithm == "sarsa":
             Q, average_rewards, average_steps, final_steps, final_reward = sarsa(
-            env, episodes, alpha, gamma, epsilon)
+                env, episodes, alpha, gamma, epsilon
+            )
 
         print(f"Average reward: {average_rewards}")
         print(f"Average steps: {average_steps}")

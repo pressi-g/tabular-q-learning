@@ -81,10 +81,10 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
 
             # Update the Q-value for the current state-action pair
             if currentS_Hash not in Q:
-                #Q[currentS_Hash] = np.zeros(numActions)
+                # Q[currentS_Hash] = np.zeros(numActions)
                 Q[currentS_Hash] = np.random.rand(numActions)
             if nextS_Hash not in Q:
-                #Q[nextS_Hash] = np.zeros(numActions)
+                # Q[nextS_Hash] = np.zeros(numActions)
                 Q[nextS_Hash] = np.random.rand(numActions)
 
             Q[currentS_Hash][action] += alpha * (
