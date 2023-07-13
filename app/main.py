@@ -19,6 +19,7 @@ def main():
     Q, q_average_rewards, q_average_steps, q_final_steps, q_final_reward = q_learning(
         env, episodes, alpha, gamma, epsilon
     )
+    print("\n")
     print("Q-Learning")
     print("Average rewards:", q_average_rewards)
     print("Average steps:", q_average_steps)
@@ -39,7 +40,7 @@ def main():
     print("Q-values:", SARSA)
 
     # Save the Q-values
-    # save_q_values(Q, 'q_values_q_learning.pkl')
+    save_q_values(Q, 'q_values_q_learning.pkl')
     save_q_values(SARSA, "q_values_sarsa.pkl")
 
     # # load the Q-values

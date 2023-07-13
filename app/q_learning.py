@@ -13,7 +13,7 @@ from torch.utils.tensorboard import SummaryWriter
 from utils import *
 
 # set random seed
-random.seed(69)
+random.seed(5)
 
 
 def q_learning(env, episodes, alpha, gamma, epsilon):
@@ -53,7 +53,6 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
         obs, _ = env.reset()
 
         # extract the current state from the observation
-        currentS = []
         currentS = extract_object_information(obs)
 
         total_reward = 0
@@ -80,9 +79,11 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
 
             # Update the Q-value for the current state-action pair
             if currentS_Hash not in Q:
-                Q[currentS_Hash] = np.zeros(numActions)
+                #Q[currentS_Hash] = np.zeros(numActions)
+                Q[currentS_Hash] = np.random.rand(numActions)
             if nextS_Hash not in Q:
-                Q[nextS_Hash] = np.zeros(numActions)
+                #Q[nextS_Hash] = np.zeros(numActions)
+                Q[nextS_Hash] = np.random.rand(numActions)
 
             Q[currentS_Hash][action] += alpha * (
                 reward + gamma * np.max(Q[nextS_Hash]) - Q[currentS_Hash][action]
@@ -90,22 +91,6 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
 
             total_reward += reward
             total_steps += 1
-
-            # if done:
-            #     # if agent reached its goal successfully
-            #     print(
-            #         "Finished episode successfully taking %d steps and receiving reward %f"
-            #         % (i, reward)
-            #     )
-            #     break
-
-            # if truncated:
-            #     # agent failed to reach its goal successfully
-            #     print(
-            #         "Truncated episode taking %d steps and receiving reward %f"
-            #         % (i, reward)
-            #     )
-            #     break
 
             if done:
                 # if agent reached its goal successfully

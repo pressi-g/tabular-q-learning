@@ -38,7 +38,7 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
     Q = {}  # declare the variable to store the tabular value-function
 
     max_steps = env.max_steps
-    numActions = env.action_space.n
+    numActions = 3 # env.action_space.n
 
     # Use a wrapper so the observation only contains the grid information
     env = ImgObsWrapper(env)
@@ -57,6 +57,9 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
 
         total_reward = 0
         total_steps = 0
+
+        # decay epsilon
+        epsilon = max(epsilon * 0.999, 0.05)
 
         # Choose an action using epsilon-greedy action selection
         currentS_Hash = metrohash.hash64_int(currentS)
@@ -78,9 +81,11 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
 
             # Update the Q-value for the current state-action pair
             if currentS_Hash not in Q:
-                Q[currentS_Hash] = np.zeros(numActions)
+                #Q[currentS_Hash] = np.zeros(numActions)
+                Q[currentS_Hash] = np.random.rand(numActions)
             if nextS_Hash not in Q:
-                Q[nextS_Hash] = np.zeros(numActions)
+                #Q[nextS_Hash] = np.zeros(numActions)
+                Q[nextS_Hash] = np.random.rand(numActions)
 
             Q[currentS_Hash][action] += alpha * (
                 reward + gamma * Q[nextS_Hash][next_action] - Q[currentS_Hash][action]
@@ -109,6 +114,7 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
 
             # Update the current state and action for the next step
             currentS = nextS
+            currentS_Hash = nextS_Hash  # Update currentS_Hash
             action = next_action
 
         # Log the reward and steps per episode to TensorBoard
