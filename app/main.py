@@ -10,12 +10,12 @@ def main():
     # Create the MiniGrid environment
     env = create_minigrid_environment()
 
-    # Best hyperparameters: {'alpha': 0.5, 'gamma': 0.9, 'epsilon': 0.2} (from grid search)
+    # Best shared hyperparameters: {'alpha': 0.35, 'gamma': 0.9, 'epsilon': 0.35} (from grid search)
     # Random seed: 5
     episodes = 3000  # number of episodes to train the agent
-    alpha = 0.5  # learning rate
+    alpha = 0.35  # learning rate
     gamma = 0.9  # discount factor
-    epsilon = 0.2  # exploration rate
+    epsilon = 0.35  # exploration rate
 
     Q, q_average_rewards, q_average_steps, q_final_steps, q_final_reward = q_learning(
         env, episodes, alpha, gamma, epsilon

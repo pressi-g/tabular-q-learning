@@ -1,0 +1,34 @@
+Start Q-learning training...
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 12 steps and receiving reward 0.954297
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 13 steps and receiving reward 0.950781
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Done Q-learning training...
+
+Q-Learning
+Average rewards: 0.9546132812500001
+Average steps: 11.91
+
+
+Start SARSA training...
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 15 steps and receiving reward 0.943750
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 13 steps and receiving reward 0.950781
+Done SARSA training...
+
+SARSA
+Average rewards: 0.9539804687500002
+Average steps: 13.09
