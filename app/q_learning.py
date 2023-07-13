@@ -1,3 +1,5 @@
+# Author: Preston Govender
+
 # RL imports
 import numpy as np
 from minigrid.wrappers import *
@@ -59,7 +61,7 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
         total_steps = 0
 
         # decay epsilon
-        epsilon = max(epsilon * 0.999, 0.05)
+        epsilon = max(epsilon * 0.999, 0.01)
 
         for i in range(max_steps):
             # Choose an action using epsilon-greedy action selection

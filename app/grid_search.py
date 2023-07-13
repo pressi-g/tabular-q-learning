@@ -19,6 +19,7 @@ def grid_search(env, hyperparams, episodes, algorithm):
         env (gym.Env): The Gym environment.
         hyperparams (dict): Dictionary of hyperparameter ranges to search.
         episodes (int): The number of episodes to train the agent for each hyperparameter combination.
+        algorithm (str): The algorithm to use for the grid search. Either "q_learning" or "sarsa".
 
     Returns:
         dict: Dictionary containing the optimal hyperparameters and the corresponding Q-values.
