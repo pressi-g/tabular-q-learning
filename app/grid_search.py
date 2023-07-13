@@ -11,7 +11,7 @@ from q_learning import q_learning
 from sarsa import sarsa
 
 
-def grid_search(env, hyperparams, episodes):
+def grid_search(env, hyperparams, episodes, algorithm):
     """
     Perform a grid search to find the optimal hyperparameters.
 
@@ -34,7 +34,7 @@ def grid_search(env, hyperparams, episodes):
     param_combinations = list(product(*hyperparams.values()))
 
     # create a csv file to store the results
-    with open("hyperparameter_results.csv", "w", newline="") as f:
+    with open(f"{algorithm}_hyperparameter_results.csv", "w", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
             ["alpha", "gamma", "epsilon", "average_steps", "average_rewards"]
@@ -44,18 +44,21 @@ def grid_search(env, hyperparams, episodes):
         alpha, gamma, epsilon = params
 
         print(
-            f"Testing hyperparameters: alpha={alpha}, gamma={gamma}, epsilon={epsilon}"
+            f"Testing {algorithm} hyperparameters: alpha={alpha}, gamma={gamma}, epsilon={epsilon}"
         )
 
-        Q, average_rewards, average_steps, final_steps, final_reward = q_learning(
-            env, episodes, alpha, gamma, epsilon
-        )
+        if algorithm == "q_learning":
+            Q, average_rewards, average_steps, final_steps, final_reward = q_learning(
+            env, episodes, alpha, gamma, epsilon)
+        elif algorithm == "sarsa":
+            Q, average_rewards, average_steps, final_steps, final_reward = sarsa(
+            env, episodes, alpha, gamma, epsilon)
 
         print(f"Average reward: {average_rewards}")
         print(f"Average steps: {average_steps}")
 
         # store the results of the best hyperparameter combination
-        with open("hyperparameter_results.csv", "a", newline="") as f:
+        with open(f"{algorithm}_hyperparameter_results.csv", "a", newline="") as f:
             writer = csv.writer(f)
             writer.writerow([alpha, gamma, epsilon, average_steps, average_rewards])
 
@@ -71,7 +74,7 @@ def grid_search(env, hyperparams, episodes):
             best_average_steps = best_steps
 
     # save best hyperparameter combination result to a csv file
-    with open("hyperparameter_results.csv", "a", newline="") as f:
+    with open(f"{algorithm}_hyperparameter_results.csv", "a", newline="") as f:
         writer = csv.writer(f)
         writer.writerow(
             [

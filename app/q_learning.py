@@ -12,9 +12,6 @@ from torch.utils.tensorboard import SummaryWriter
 # import functions
 from utils import *
 
-# set random seed
-random.seed(5)
-
 
 def q_learning(env, episodes, alpha, gamma, epsilon):
     """
@@ -36,6 +33,9 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
     writer = SummaryWriter()
 
     Q = {}  # declare the variable to store the tabular value-function
+
+    # set random seed
+    random.seed(5)
 
     max_steps = env.max_steps
     numActions = 3  # env.action_space.n

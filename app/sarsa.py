@@ -12,9 +12,6 @@ from torch.utils.tensorboard import SummaryWriter
 # import functions
 from utils import *
 
-# set random seed
-random.seed(5)
-
 
 def sarsa(env, episodes, alpha, gamma, epsilon):
     """
@@ -34,6 +31,9 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
     """
     # Tensorboard writer
     writer = SummaryWriter()
+
+    # set random seed
+    random.seed(5)
 
     Q = {}  # declare the variable to store the tabular value-function
 

@@ -10,9 +10,9 @@ def main():
 
     # Best hyperparameters: {'alpha': 0.1, 'gamma': 0.9, 'epsilon': 0.5} (from grid search)
     episodes = 3000  # number of episodes to train the agent
-    alpha = 0.1  # learning rate
+    alpha = 0.5  # learning rate
     gamma = 0.9  # discount factor
-    epsilon = 0.5  # exploration rate
+    epsilon = 0.2  # exploration rate
     # Best average rewards: 0.9584101562499997 (from grid search)
     # Best average steps: 10.83 (from grid search)
 

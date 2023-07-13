@@ -19,11 +19,11 @@ def main():
     }
 
     episodes = (
-        3000  # Number of episodes to evaluate for each hyperparameter combination
+        2000  # Number of episodes to evaluate for each hyperparameter combination
     )
 
     best_hyperparams, best_average_rewards, best_average_steps = grid_search(
-        env, hyperparams, episodes
+        env, hyperparams, episodes, algorithm="sarsa"
     )
     print("Best hyperparameters:", best_hyperparams)
     print("Best average rewards:", best_average_rewards)
