@@ -5,7 +5,13 @@ The environment which the agent needs to navigate is a 2D grid, that represents 
 
 ## Introduction
 
-Tabular Q-Learning is a reinforcement learning technique that allows an agent to learn an optimal policy for a given environment. In this case, we use the MiniGridWorld environment from OpenAI Gymnasium, which represents a grid world with various objects and agents. The goal is to train an agent to navigate the grid world and achieve a specific objective, such as reaching a target location while avoiding obstacles.
+Tabular Q-Learning and SARSA are reinforcement learning techniques that allow an agent to learn an optimal policy for a given environment. In this case, we use a MiniGridWorld environment, which contains an empty grid world with sparse reward (the reward is achieved when the goal is met). The agent learns by interacting with the environment, observing the state and taking actions to maximize its cumulative reward.
+
+Q-Learning is an off-policy learning algorithm that learns the optimal action-value function (Q-values) for each state-action pair. It uses a table (or dictionary) to store the Q-values and updates them based on the observed rewards and the maximum Q-value of the next state.
+
+SARSA, on the other hand, is an on-policy learning algorithm that learns the action-value function by updating the Q-values based on the observed rewards and the action taken in the next state. It stands for State-Action-Reward-State-Action, indicating that it considers the next action as well.
+
+Both Q-Learning and SARSA are iterative algorithms that improve the agent's policy over time. They are known as model-free algorithms, as they do not require prior knowledge of the environment dynamics and rely solely on interactions with the environment.
 
 ## Installation
 
@@ -65,10 +71,10 @@ To run this code, you need to have Python 3.8 and pip installed on your system. 
    python3 main.py
    ```
 
-7. Run the optimal policy script:
+7. Render the optimal policy:
 
    ```
-   python3 optimal_policy.py
+   python3 render_optimal_policy.py
    ```
 
 8. *Optional*:
@@ -85,26 +91,56 @@ To run this code, you need to have Python 3.8 and pip installed on your system. 
 ## Directory Structure
 
 The structure of this repository is as follows:
-
 ```
-├── agent.py            # Contains the Tabular Q-Learning agent implementation
-├── environment.py      # Implements the MiniGridWorld environment using Gymnasium
-├── main.py             # Entry point for running the training and evaluation
-├── README.md           # This file, providing an overview of the repository
-├── requirements.txt    # List of dependencies required to run the code
-└── utils.py            # Utility functions for visualizing the environment and results
+└── app
+|  ├── .gitignore
+|  ├── grid_search.py
+|  ├── main.py
+|  ├── q_learning_hyperparameter_results.csv
+|  ├── q_learning.py
+|  ├── q_values_q_learning.pkl
+|  ├── q_values_sarsa.pkl
+|  ├── render_optimal_policy.py
+|  ├── run_qrid_search.py
+|  ├── sarsa_hyperparameter_results.csv
+|  ├── sarsa.py
+|  └──  utils.py
+└── README.md
+└── requirements.txt
+└── tests
+   └── unit-tests
+   |   ├── ...
+   |   └── ...
+   └── integration-tests
+      ├── ...
+      └── ...
+
 ```
 
 Here's a brief description of the files in this repository:
 
-- `agent.py`: This file contains the implementation of the Tabular Q-Learning agent, including the Q-table and learning algorithm.
-- `environment.py`: This file implements the MiniGridWorld environment using the OpenAI Gymnasium library, providing the necessary functions to interact with the environment.
-- `main.py`: The main entry point for running the training and evaluation process. It sets up the environment, creates an agent, and runs the training loop.
-- `README.md`: The file you are currently reading, providing an overview of the repository and instructions for setup.
-- `requirements.txt`: A file that lists the dependencies required to run the code. You can install these dependencies using `pip` as mentioned in the installation section.
-- `utils.py`: Contains utility functions for visualizing the environment and displaying results, which can aid in understanding the agent's behavior.
+The directory structure consists of the following components:
 
-Feel free to explore the code files, modify them, and experiment with different settings to understand and improve the Tabular Q-Learning algorithm on MiniGridWorld.
+- `app`: Contains the main application code.
+  - `.gitignore`: Specifies files and directories to be ignored by Git version control.
+  - `grid_search.py`: Implements the grid search algorithm to find optimal hyperparameters.
+  - `main.py`: Main script to run and train the agent in the MiniGridWorld environment.
+  - `q_learning_hyperparameter_results.csv`: CSV file containing the results of Q-Learning hyperparameter search.
+  - `q_learning.py`: Implements the Q-Learning algorithm.
+  - `q_values_q_learning.pkl`: Pickle file to store the learned Q-values from Q-Learning.
+  - `q_values_sarsa.pkl`: Pickle file to store the learned Q-values from SARSA.
+  - `render_optimal_policy.py`: Renders the optimal policy learned by the agent.
+  - `run_grid_search.py`: Script to run the grid search for optimal hyperparameters.
+  - `sarsa_hyperparameter_results.csv`: CSV file containing the results of SARSA hyperparameter search.
+  - `sarsa.py`: Implements the SARSA algorithm.
+  - `utils.py`: Contains utility functions used in the application.
+- `README.md`: The main documentation file providing an overview of the project.
+- `requirements.txt`: Lists the required Python dependencies for the project.
+- `tests`: Contains unit and integration tests for the application.
+  - `unit-tests`: Directory for unit tests.
+  - `integration-tests`: Directory for integration tests.
+
+Feel free to explore the code files, modify them, and experiment with different settings to understand and improve the Tabular Q-Learning and SARSA algorithms on MiniGridWorld.
 
 
 ## Testing
@@ -133,11 +169,4 @@ This project includes test cases to ensure the correctness of the implemented al
 
 5. After running the tests, you will see the test results in the terminal or command prompt, indicating which tests passed or failed.
 
-It's important to regularly run the tests to ensure the correctness of your implementation, especially when modifying the code or adding new features. Writing tests for different scenarios and edge cases can help uncover potential bugs and provide confidence in the functionality of your project.
-
-Feel free to expand the test suite by adding more test cases as you develop your project further.
-
 If you encounter any issues or failures during the test execution, please feel free to open an issue in this repository for assistance.
-
-If you have any questions or run into issues, please open an issue in this repository, and I'll be happy to assist you.
-```

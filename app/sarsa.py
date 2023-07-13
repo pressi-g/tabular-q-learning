@@ -61,7 +61,7 @@ def sarsa(env, episodes, alpha, gamma, epsilon):
         total_steps = 0
 
         # decay epsilon
-        epsilon = max(epsilon * 0.999, 0.01)
+        epsilon = max(epsilon * 0.999, 0.05)
 
         # Choose an action using epsilon-greedy action selection
         currentS_Hash = metrohash.hash64_int(currentS)

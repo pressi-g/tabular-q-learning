@@ -61,7 +61,7 @@ def q_learning(env, episodes, alpha, gamma, epsilon):
         total_steps = 0
 
         # decay epsilon
-        epsilon = max(epsilon * 0.999, 0.01)
+        epsilon = max(epsilon * 0.999, 0.05)
 
         for i in range(max_steps):
             # Choose an action using epsilon-greedy action selection
