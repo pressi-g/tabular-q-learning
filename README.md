@@ -95,7 +95,9 @@ The structure of this repository is as follows:
 └── app
 |  ├── .gitignore
 |  ├── grid_search.py
+|  ├── joint_hyperparameter_results.csv
 |  ├── main.py
+|  ├── output_logs.txt
 |  ├── q_learning_hyperparameter_results.csv
 |  ├── q_learning.py
 |  ├── q_values_q_learning.pkl
@@ -124,7 +126,9 @@ The directory structure consists of the following components:
 - `app`: Contains the main application code.
   - `.gitignore`: Specifies files and directories to be ignored by Git version control.
   - `grid_search.py`: Implements the grid search algorithm to find optimal hyperparameters.
+  - `joint_hyperparameter_results.csv`: CSV file containing the results of the joint hyperparameter search.
   - `main.py`: Main script to run and train the agent in the MiniGridWorld environment.
+  - `output_logs.txt`: Text file containing the output logs of the application.
   - `q_learning_hyperparameter_results.csv`: CSV file containing the results of Q-Learning hyperparameter search.
   - `q_learning.py`: Implements the Q-Learning algorithm.
   - `q_values_q_learning.pkl`: Pickle file to store the learned Q-values from Q-Learning.
