@@ -100,7 +100,9 @@ The structure of this repository is as follows:
 |  ├── output_logs.txt
 |  ├── q_learning_hyperparameter_results.csv
 |  ├── q_learning.py
+|  ├── q_values_q_learning_best.pkl
 |  ├── q_values_q_learning.pkl
+|  ├── q_values_sarsa_best.pkl
 |  ├── q_values_sarsa.pkl
 |  ├── render_optimal_policy.py
 |  ├── run_qrid_search.py
@@ -131,8 +133,10 @@ The directory structure consists of the following components:
   - `output_logs.txt`: Text file containing the output logs of the application.
   - `q_learning_hyperparameter_results.csv`: CSV file containing the results of Q-Learning hyperparameter search.
   - `q_learning.py`: Implements the Q-Learning algorithm.
-  - `q_values_q_learning.pkl`: Pickle file to store the learned Q-values from Q-Learning.
-  - `q_values_sarsa.pkl`: Pickle file to store the learned Q-values from SARSA.
+  - `q_values_q_learning_best.pkl`: Pickle file to store the learned Q-values from Q-Learning, trained on the best hyperparameters.
+  - `q_values_q_learning.pkl`: Pickle file to store the learned Q-values from Q-Learning, trained on the best shared hyperparameters.
+  - `q_values_sarsa_best.pkl`: Pickle file to store the learned Q-values from SARSA, trained on the best hyperparameters.
+  - `q_values_sarsa.pkl`: Pickle file to store the learned Q-values from SARSA, trained on the best shared hyperparameters.
   - `render_optimal_policy.py`: Renders the optimal policy learned by the agent.
   - `run_grid_search.py`: Script to run the grid search for optimal hyperparameters.
   - `sarsa_hyperparameter_results.csv`: CSV file containing the results of SARSA hyperparameter search.
@@ -149,7 +153,7 @@ Feel free to explore the code files, modify them, and experiment with different 
 
 ## Testing
 
-This project includes test cases to ensure the correctness of the implemented algorithms and functionalities. The tests are written using the `pytest` framework. To run the tests, follow these steps:
+This project includes test cases to ensure the correctness of the implemented algorithms and functionalities. The tests are written using the `pytest` framework. (Please note that this repo is still under construction and the tests are still to be added. Once they are added you may follow as prescribed). To run the tests, follow these steps:
 
 1. Make sure you have installed the project dependencies as mentioned in the installation section.
 

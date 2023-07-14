@@ -1,3 +1,5 @@
+-------------------------SHARED HYPERPARAMETERS-----------------------------
+
 Start Q-learning training...
 Finished episode successfully taking 11 steps and receiving reward 0.957812
 Finished episode successfully taking 11 steps and receiving reward 0.957812
@@ -32,3 +34,42 @@ Done SARSA training...
 SARSA
 Average rewards: 0.9539804687500002
 Average steps: 13.09
+
+
+-------------------------BEST AGENTS-----------------------------
+
+Start Q-learning training...
+Finished episode successfully taking 15 steps and receiving reward 0.943750
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 13 steps and receiving reward 0.950781
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 13 steps and receiving reward 0.950781
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 17 steps and receiving reward 0.936719
+Done Q-learning training...
+
+
+Q-Learning
+Average rewards: 0.9552109375000001
+Average steps: 11.74
+
+Start SARSA training...
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 13 steps and receiving reward 0.950781
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 11 steps and receiving reward 0.957812
+Finished episode successfully taking 13 steps and receiving reward 0.950781
+Done SARSA training...
+
+
+SARSA
+Average rewards: 0.9551406250000001
+Average steps: 12.76

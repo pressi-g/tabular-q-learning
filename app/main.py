@@ -11,6 +11,8 @@ def main():
     env = create_minigrid_environment()
 
     # Best shared hyperparameters: {'alpha': 0.35, 'gamma': 0.9, 'epsilon': 0.35} (from grid search)
+    # Best Q-learning hyperparameters: {'alpha': 0.5, 'gamma': 0.9, 'epsilon': 0.3} (from grid search)
+    # Best SARSA hyperparameters: {'alpha': 0.2, 'gamma': 0.9, 'epsilon': 0.4} (from grid search)
     # Random seed: 5
     episodes = 3000  # number of episodes to train the agent
     alpha = 0.35  # learning rate

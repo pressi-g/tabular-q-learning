@@ -14,6 +14,7 @@ import pygame
 def render_optimal_policy(title):
     # Load the Q-values
     Q = load_q_values(f"q_values_{title}.pkl")
+    print(f"Rendering: q_values_{title}.pkl")
 
     # Create the environment
     env = gym.make("MiniGrid-Empty-8x8-v0", render_mode="human")
