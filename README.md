@@ -3,6 +3,11 @@
 This repository contains an implementation of Tabular Q-Learning and SARSA applied to a MiniGridWorld problem using the Farama-Foundation's [minigrid](https://github.com/Farama-Foundation/Minigrid) Gymnasium environment. The agent is restricted to 3 actions (forward, turn left, and turn right). 
 The environment which the agent needs to navigate is a 2D grid, that represents an empty room, and the agents goal is to reach the green goal square, which provides a sparse reward. A small penalty is subtracted for the number of steps to reach the goal.
 
+<div style="display: flex; justify-content: center;">
+  <img src="app/images-video/optimal_policies_render.gif" alt="solution">
+</div>
+
+
 ## Introduction
 
 Tabular Q-Learning and SARSA are reinforcement learning techniques that allow an agent to learn an optimal policy for a given environment. In this case, we use a MiniGridWorld environment, which contains an empty grid world with sparse reward (the reward is achieved when the goal is met). The agent learns by interacting with the environment, observing the state and taking actions to maximize its cumulative reward.
