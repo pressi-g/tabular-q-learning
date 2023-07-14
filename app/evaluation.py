@@ -11,18 +11,21 @@ import metrohash
 
 from utils import create_minigrid_environment, load_q_values, extract_object_information
 
+
 def evaluation(algorithm):
     """
     Evaluates the performance of the agent using the Q-values
     :param algorithm: the algorithm to evaluate
     :return: the average reward, steps and completion rate
-    
+
     """
     # Set the random seed
     random.seed(5)
-    
+
     # Initialise the environment
-    env = create_minigrid_environment(grid_type="MiniGrid-Empty-8x8-v0", render_mode=None)
+    env = create_minigrid_environment(
+        grid_type="MiniGrid-Empty-8x8-v0", render_mode=None
+    )
 
     # load the q-table
     Q = load_q_values(f"q_values_{algorithm}.pkl")
@@ -63,7 +66,7 @@ def evaluation(algorithm):
         # Update the total completion
         if done:
             total_completion += 1
-            
+
     # calculate the average reward, steps and completion rate
     avg_reward = total_reward / 1000
     avg_steps = total_steps / 1000
@@ -76,11 +79,10 @@ def evaluation(algorithm):
 
     # return avg_reward, avg_steps, avg_completion
 
+
 if __name__ == "__main__":
     print("Evaluating Q-learning")
     evaluation("q_learning")
     print("\n")
     print("Evaluating SARSA")
     evaluation("sarsa")
-
-

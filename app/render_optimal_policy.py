@@ -17,7 +17,7 @@ def render_optimal_policy(title):
     :param title: the title of the Q-values file
     :return: None
     """
-    
+
     # Load the Q-values
     Q = load_q_values(f"q_values_{title}.pkl")
     print(f"Rendering: q_values_{title}.pkl")
