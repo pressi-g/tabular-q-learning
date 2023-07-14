@@ -4,7 +4,7 @@ This repository contains an implementation of Tabular Q-Learning and SARSA appli
 The environment which the agent needs to navigate is a 2D grid, that represents an empty room, and the agents goal is to reach the green goal square, which provides a sparse reward. A small penalty is subtracted for the number of steps to reach the goal.
 
 <div style="display: flex; justify-content: center;">
-  <img src="app/images-video/optimal_policies_render.gif" alt="solution">
+  <img src="app/optimal_policies_render.gif" alt="solution">
 </div>
 
 
