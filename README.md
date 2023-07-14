@@ -68,28 +68,34 @@ To run this code, you need to have Python 3.8 and pip installed on your system. 
    pip install -r requirements.txt
    ```
 
-6. *Optional*
-
-   Run the training and evaluation script:
+6. Run main.py to run evaluation of the agent and render the optimal policy:
 
    ```
    python3 main.py
    ```
+***Or run the following scripts individually:***
 
-7. Render the optimal policy:
+   7. Run the evaluation script:
 
-   ```
-   python3 render_optimal_policy.py
-   ```
+      ```
+      python3 evaluation.py
+      ```
+
+   8. Render the optimal policy:
+
+      ```
+      python3 render_optimal_policy.py
+      ```
+
 
 8. *Optional*:
    
-   You can view the training and evaluation results for the grid search by running:
+   You can view the training results for the grid search by running:
 
    ```
    tensorboard --logdir=grid-search-runs --port=8008
    ```
-   You can view the training and evaluation results for the optimal policy by running:
+   You can view the training results for the optimal policy by running:
    ```
    tensorboard --logdir=runs    
    ```
@@ -99,6 +105,7 @@ The structure of this repository is as follows:
 ```
 └── app
 |  ├── .gitignore
+|  ├── evaluation.py
 |  ├── grid_search.py
 |  ├── joint_hyperparameter_results.csv
 |  ├── main.py
@@ -113,6 +120,7 @@ The structure of this repository is as follows:
 |  ├── run_qrid_search.py
 |  ├── sarsa_hyperparameter_results.csv
 |  ├── sarsa.py
+|  ├── train.py
 |  └──  utils.py
 └── README.md
 └── requirements.txt
@@ -132,9 +140,10 @@ The directory structure consists of the following components:
 
 - `app`: Contains the main application code.
   - `.gitignore`: Specifies files and directories to be ignored by Git version control.
+   - `evaluation.py`: Evaluates the learned Q-values, epsilon-greedily, by running the agent in the environment.
   - `grid_search.py`: Implements the grid search algorithm to find optimal hyperparameters.
   - `joint_hyperparameter_results.csv`: CSV file containing the results of the joint hyperparameter search.
-  - `main.py`: Main script to run and train the agent in the MiniGridWorld environment.
+  - `main.py`: Runs the evaluation script and renders the optimal policy.
   - `output_logs.txt`: Text file containing the output logs of the application.
   - `q_learning_hyperparameter_results.csv`: CSV file containing the results of Q-Learning hyperparameter search.
   - `q_learning.py`: Implements the Q-Learning algorithm.
@@ -146,6 +155,7 @@ The directory structure consists of the following components:
   - `run_grid_search.py`: Script to run the grid search for optimal hyperparameters.
   - `sarsa_hyperparameter_results.csv`: CSV file containing the results of SARSA hyperparameter search.
   - `sarsa.py`: Implements the SARSA algorithm.
+  - `train.py`: Training script to run and train the agent in the MiniGridWorld environment.
   - `utils.py`: Contains utility functions used in the application.
 - `README.md`: The main documentation file providing an overview of the project.
 - `requirements.txt`: Lists the required Python dependencies for the project.
@@ -158,7 +168,7 @@ Feel free to explore the code files, modify them, and experiment with different 
 
 ## Testing
 
-This project includes test cases to ensure the correctness of the implemented algorithms and functionalities. The tests are written using the `pytest` framework. (Please note that this repo is still under construction and the tests are still to be added. Once they are added you may follow as prescribed). To run the tests, follow these steps:
+This project includes test cases to ensure the correctness of the implemented algorithms and functionalities. The tests are written using the `pytest` framework. ***(Please note that this repo is still under construction and the tests are still to be added. Once they are added you may follow as prescribed)***. To run the tests, follow these steps:
 
 1. Make sure you have installed the project dependencies as mentioned in the installation section.
 
