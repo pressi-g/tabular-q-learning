@@ -1,9 +1,8 @@
 # Author: Preston Govender
 
-from utils import save_q_values, load_q_values, create_minigrid_environment
+from utils import save_q_values, create_minigrid_environment
 from q_learning import q_learning
 from sarsa import sarsa
-from render_optimal_policy import render_optimal_policy
 
 
 def main():

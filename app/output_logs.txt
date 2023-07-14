@@ -73,3 +73,19 @@ Done SARSA training...
 SARSA
 Average rewards: 0.9551406250000001
 Average steps: 12.76
+
+
+----------------------SHARED HYPERPARAMETERS EVALUATION--------------------------
+
+Evaluating Q-learning
+Loading existing Q values
+Average reward: 0.957363
+Average steps: 12.128000
+Average completion rate: 100.000000
+
+
+Evaluating SARSA
+Loading existing Q values
+Average reward: 0.957341
+Average steps: 12.134000
+Average completion rate: 100.000000
